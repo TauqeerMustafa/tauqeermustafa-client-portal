@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Client Workspace",
-  description: "A private workspace for authorized clients.",
+  title: "Authorized Workspaces | Tauqeer Mustafa Inc.",
+  description: "Private, role-scoped workspaces for authorized accounts.",
   robots: { index: false, follow: false },
 };
 

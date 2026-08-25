@@ -1,36 +1,11 @@
-const CLIENT_TOKEN_KEY = "tmi_client_token";
+import { portalApiUrl, portalFetch, clearPortalToken, getPortalToken, setPortalToken } from "@/lib/portal-auth";
 
-export function getClientToken(): string | null {
-  if (typeof window === "undefined") return null;
-  return window.localStorage.getItem(CLIENT_TOKEN_KEY);
-}
+import type { ClientOverview } from "@/types/client";
 
-export function setClientToken(token: string): void {
-  window.localStorage.setItem(CLIENT_TOKEN_KEY, token);
-}
-
-export function clearClientToken(): void {
-  window.localStorage.removeItem(CLIENT_TOKEN_KEY);
-}
-
-export function clientApiUrl(path: string): string {
-  const base = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-  return `${base.replace(/\/$/, "")}${path}`;
-}
-
-export async function clientFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const token = getClientToken();
-  const response = await fetch(clientApiUrl(path), {
-    ...init,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(init.headers || {}),
-    },
-  });
-  const payload = await response.json().catch(() => null);
-  if (!response.ok) {
-    throw new Error(payload?.detail || payload?.message || "The client portal request failed.");
-  }
-  return payload?.data ?? payload;
-}
+export const CLIENT_ROLE = "client" as const;
+export const getClientToken = () => getPortalToken(CLIENT_ROLE);
+export const setClientToken = (token: string) => setPortalToken(CLIENT_ROLE, token);
+export const clearClientToken = () => clearPortalToken(CLIENT_ROLE);
+export const clientApiUrl = (path: string) => portalApiUrl(CLIENT_ROLE, path);
+export const clientFetch = <T>(path: string, init?: RequestInit) => portalFetch<T>(CLIENT_ROLE, path, init);
+export type ClientApiOverview = ClientOverview;

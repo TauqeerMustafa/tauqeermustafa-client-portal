@@ -2,12 +2,7 @@ export interface ClientUser {
   id: string;
   name: string;
   email: string;
-  role: string;
-  phone?: string | null;
-  status: string;
-  permissions: string[];
-  createdAt?: string;
-  updatedAt?: string;
+  company?: string | null;
 }
 
 export interface ClientProject {
@@ -15,9 +10,8 @@ export interface ClientProject {
   name: string;
   status: string;
   summary?: string | null;
-  nextMilestone?: string | null;
   progress: number;
-  createdAt: string;
+  nextMilestone?: string | null;
   updatedAt: string;
 }
 
