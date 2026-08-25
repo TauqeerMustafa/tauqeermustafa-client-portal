@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  --portal-ink: #151922;
+  --portal-paper: #f5f7fa;
+  --portal-line: #dbe1e8;
+  --portal-blue: #1c69d4;
+  --portal-muted: #6c7480;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--portal-paper); }
+body {
+  margin: 0;
+  background: var(--portal-paper);
+  color: var(--portal-ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+
+.m-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, #1c69d4 0 33%, #f2f4f7 33% 66%, #d72c32 66% 100%);
+}
